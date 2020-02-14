@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Aleksandar Zrnic">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=McLaren&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+   </head>
+
+   <body>
+       <table id="InputTable" class="table table-bordered" onclick="add(event);">
+            <thead>
+                <th>Red.Br</th>
+                <th>Trgovački naziv i vrsta dobra i usluga</th>
+                <th>Jed. Mjere</th>
+                <th>Količina</th>
+                <th>Pojedinačna vrijednost bez PDV-a</th>
+                <th>Stopa PDV-a</th>
+                <th>Ukupan iznos naknade bez PDV-a</th>
+                <th>Ukupan iznos PDV-a</th>
+                <th>Ukupan iznos naknade sa PDV-om</th>
+                </thead>
+                <tbody id="data">
+                    <tr>
+                        <td><input id="00" type="text" data-x="0" data-y="0"></td>
+                        <td><input id="01" type="text" data-x="0" data-y="1"></td>
+                        <td><input id="02" type="text" data-x="0" data-y="2"></td>
+                        <td><input id="03" type="text" data-x="0" data-y="3"></td>
+                        <td><input id="04" type="text" data-x="0" data-y="4"></td>
+                        <td><input id="05" type="text" data-x="0" data-y="5"></td>
+                        <td><input id="06" type="text" data-x="0" data-y="6"></td>
+                        <td><input id="07" type="text" data-x="0" data-y="7"></td>
+                        <td><input id="08" type="text" data-x="0" data-y="8"></td>
+                    </tr>
+                </tbody>
+        </table>
+
+        <script>
+            
+            var TableInput = document.getElementById("InputTable");
+            TableInput.onkeydown = function (event)
+            {
+                var cell = document.getElementById(event.target.id);
+                var x = parseInt(cell.getAttribute("data-x"));
+                var y = parseInt(cell.getAttribute("data-y"));
+                console.log(x);
+                console.log(y);
+                if(event.keyCode == 37)
+                {
+                    console.log('left');
+                    if( y != 0)
+                    {
+                        var cordinate = x.toString()+(y-1).toString();
+                        document.getElementById(cordinate.toString()).focus();
+                    }
+                }
+                else if (event.keyCode == 39)
+                {
+                    console.log('right');
+                    if(y!=8)
+                    {
+                        var cordinate = x.toString()+(y+1).toString();
+                        document.getElementById(cordinate.toString()).focus();
+                    }
+                }
+                else if (event.keyCode == 38)
+                {
+                    console.log('up');
+                    if(x!=0)
+                    {
+                        var cordinate = (x-1).toString()+y.toString();
+                        document.getElementById(cordinate.toString()).focus();
+                    }
+                }
+                else if (event.keyCode == 40)
+                {
+                    console.log('down');
+                    var cordinate = (x+1).toString()+y.toString();
+                    document.getElementById(cordinate.toString()).focus(); 
+                }
+            }
+            function add (event)
+            {
+                var cell = document.getElementById(event.target.id);
+                console.log(cell.value.length);
+                list = document.getElementById("data");
+                if(cell.value.length!=0)
+                {
+                    console.log(list);
+                    list+=" <tr><td><input id="00" type="text" data-x="0" data-y="0"></td><td><input id="01" type="text" data-x="0" data-y="1"></td><td><input id="02" type="text" data-x="0" data-y="2"></td><td><input id="03" type="text" data-x="0" data-y="3"></td><td><input id="04" type="text" data-x="0" data-y="4"></td></tr>"
+                    document.getElementById('data').innerHTML=list;
+                }
+               
+
+            }
+        </script>
+
+   </body>
+
+</html>
